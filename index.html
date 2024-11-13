@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Donald Zarura">
+  <meta name="description" content="A todo app made by doniecode">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <title>Frontend Mentor | Todo app</title>
+</head>
+
+<body class="">
+  <main class="container">
+    <section class="todo-app" id="todo-app">
+      <!-- header -->
+      <div class="todo-header">
+        <h1 class="heading">to do</h1>
+        <div class="mode-toggler-btns">
+          <img src="images/icon-sun.svg" alt="sun icon" class="light-mode-icon">
+          <img src="images/icon-moon.svg" alt="moon icon" class="dark-mode-icon">
+        </div>
+      </div>
+
+      <!-- add a new task -->
+      <div class="add-task-bar add-bar-light">
+        <div>
+          <label for="check" class="add-task-circle">
+            <input type="checkbox" class="checkbox" id="check">
+            <div class="toggle"></div>
+          </label>
+        </div>
+        <input type="text" class="input-value" placeholder="Create a new todo...">
+        <div><i class="fas fa-plus add-task-btn"></i></div>
+      </div>
+
+      <!-- to do list items -->
+      <ul class="all-tasks tasks-light-mode">
+        
+        <li class="items-footer light-footer" draggable="false">
+          <div class="item-count"></div>
+          <div class="item-filters">
+            <span class="filter-all active-filter">All</span>
+            <span class="filter-active">Active</span>
+            <span class="filter-completed">Completed</span>
+          </div>
+          <div class="clear-completed">Clear Completed</div>
+        </li>
+      </ul>
+      <!-- all tasks end here -->
+       <div class="drag-and-drop">
+        Drag and drop to reorder list
+       </div>
+    </section>
+  </main>
+
+  <!--
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="#">Your Name Here</a>.
+    </div>
+    -->
+
+  <script src="script.js"></script>
+</body>
+
+</html>

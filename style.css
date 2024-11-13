@@ -1,0 +1,512 @@
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role='list'],
+ol[role='list'],
+ul,
+ol {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+a{
+  text-decoration: none;
+}
+
+/* Make images easier to work with */
+img,
+picture,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+   scroll-behavior: auto;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* variables */
+
+:root{
+  /* Primary */
+--Bright-Blue: hsl(220, 98%, 61%);
+--Check-Background: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+
+/* Neutral */
+--Very-Light-Gray: hsl(0, 0%, 98%);
+--Very-Light-Grayish-Blue: hsl(236, 33%, 92%);
+--Light-Grayish-Blue: hsl(233, 11%, 84%);
+--Dark-Grayish-Blue: hsl(236, 9%, 61%);
+--Very-Dark-Grayish-Blue: hsl(235, 19%, 35%);
+
+/* Dark Theme */
+--Very-Dark-Blue: hsl(235, 21%, 11%);
+--Very-Dark-Desaturated-Blue: hsl(235, 24%, 19%);
+--Light-Grayish-Blue: hsl(234, 39%, 85%);
+--Light-Grayish-Blue2: hsl(234, 39%, 85%);
+--Light-Grayish-Blue-hover-effects: hsl(236, 33%, 92%);
+--Dark-Grayish-Blue2: hsl(234, 11%, 52%);
+--Very-Dark-Grayish-Blue: hsl(233, 14%, 35%);
+--Very-Dark-Grayish-Blue2: hsl(237, 14%, 26%);
+--Very-Dark-Grayish-Blue3: hsl(237, 14%, 26%);
+}
+
+/* body */
+body{
+  font-family: "Josefin Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1.1rem;
+  background-image: url(images/bg-desktop-dark.jpg);
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: contain;
+  background-color: var(--Very-Dark-Blue);
+}
+.container{
+  width: 100%;
+  max-width: 1440px;
+  height: 100vh;
+  margin: 0 auto;
+/*   display: grid;
+  place-items: center; */
+}
+
+/* APPLICATION STARTS HERE */
+.todo-app{
+  max-width: 550px;
+  height: auto;
+  margin: 0 auto;
+  padding: 80px 0;
+}
+/* task header */
+.todo-header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  letter-spacing: 0.6rem;
+  word-spacing: -1.2rem;
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+}
+.heading{
+  color: var(--Very-Light-Gray);
+  text-transform: uppercase;
+}
+.mode-toggler-btns{
+  display: block;
+  cursor: pointer;
+}
+.dark-mode-icon{
+  display: none;
+}
+
+/* light mode */
+.light-mode{
+  background-color: var(--Very-Light-Gray);
+  background-image: url(images/bg-desktop-light.jpg);
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: contain;
+}
+.add-bar-light{
+  margin-bottom: 1.2rem;
+  width: 100%;
+  height: 3rem;
+  background-color: var(--Very-Light-Gray);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  border-radius: 0.3rem;
+  box-shadow: 0px 10px 10px -15px;
+}
+.add-bar-light .toggle{
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+  border: 1.5px solid var(--Light-Grayish-Blue);
+  border-radius: 50%;
+  cursor: pointer;
+}
+.add-bar-light .input-value::placeholder{
+  color: var(--Dark-Grayish-Blue);
+}
+.tasks-light-mode{
+  background-color: var(--Very-Light-Gray);
+  border-radius: 0.3rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 10px 50px -32px;
+}
+.tasks-light-mode:not(.all-tasks) .task-row .task-toggle{
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+  border: 1.5px solid var(--Light-Grayish-Blue) !important;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.tasks-light-mode .task-row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  min-height: 3rem;
+  border-bottom: 1.5px solid var(--Very-Light-Grayish-Blue);
+}
+.tasks-light-mode .task-name{
+  flex: 1;
+  color: var(--Very-Dark-Grayish-Blue);
+}
+.tasks-light-mode .line-through{
+  text-decoration: line-through;
+  text-decoration-thickness: 0.1rem;
+  text-decoration-color: var(--Dark-Grayish-Blue2);
+  color: var(--Dark-Grayish-Blue2);
+}
+/* light mode ends here */
+/* ////////////////////////////////// */
+
+/* add new task */
+.add-task-bar{
+  margin-bottom: 1.2rem;
+  width: 100%;
+  height: 3rem;
+  background-color: var(--Very-Dark-Desaturated-Blue);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  border-radius: 0.3rem;
+}
+/* add task checkbox circle */
+.checkbox{
+  display: none;
+}
+.add-task-circle{
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin: 0 auto;
+}
+.add-task-bar .toggle{
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+  border: 1.5px solid var(--Very-Dark-Grayish-Blue);
+  border-radius: 50%;
+  cursor: pointer;
+}
+.input-value{
+  flex: 1;
+  background-color: transparent;
+  border: none;
+}
+.input-value:focus{
+  border: none;
+  outline: none;
+}
+.input-value[placeholder]{
+  color: var(--Very-Dark-Grayish-Blue);  
+}
+.fa-plus{
+  color: var(--Dark-Grayish-Blue);
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+/* task row spacings */
+.task-name,
+.input-value{
+  margin-left: 1.3rem;
+}
+
+/* all tasks */
+.task-name,
+.task-checkbox,
+.checkbox-circle{
+  cursor: pointer;
+}
+.all-tasks{
+  background-color: var(--Very-Dark-Desaturated-Blue);
+  border-radius: 0.3rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 10px 50px -10px;
+}
+.all-tasks .dragging{
+  background-color: var(--Very-Dark-Grayish-Blue3);
+  box-shadow: 5px 5px 20px -10px
+}
+.tasks-light-mode:not(.all-tasks) .dragging{
+  background-color: var(--Light-Grayish-Blue-hover-effects);
+  box-shadow: 5px 5px 20px -10px;
+}
+.all-tasks .task-row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  min-height: 3rem;
+  border-bottom: 0.1rem solid var(--Very-Dark-Grayish-Blue2);
+}
+.task-row:last-child{
+  border-bottom: 0;
+}
+.all-tasks .task-name{
+  flex: 1;
+  color: var(--Light-Grayish-Blue);
+}
+.all-tasks .line-through{
+  text-decoration: line-through;
+  text-decoration-thickness: 0.1rem;
+  text-decoration-color: var(--Dark-Grayish-Blue);
+  color: var(--Dark-Grayish-Blue);
+}
+.delete-task{
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+  display: none;
+  margin-left: 1rem;
+}
+.task-row:hover .delete-task{
+  display: block;
+}
+
+/* Checkboxes and their hover states */
+.checkbox-circle{
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin: 0 auto;
+}
+.task-checkbox{
+  display: none;
+}
+.task-toggle:not(.check-bg){
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+  border: 1.6px solid var(--Very-Dark-Grayish-Blue) !important;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.task-toggle:not(.check-bg)::after{
+  content: "";
+  background: var(--Check-Background);
+  background-color: var(--Very-Dark-Desaturated-Blue);
+  border-radius: 50%;
+  width: 8px;
+  height: 8px;
+  position: absolute;
+  margin: auto;
+  z-index: -1;
+}
+.task-toggle:not(.check-bg):hover{
+  z-index: 1;
+  background-color: var(--Very-Dark-Desaturated-Blue);
+  width: 20px;
+  height: 20px;
+}
+
+/* checkboxes hover states ends here */
+
+/* checkbox custom */
+.check-bg{
+  background: var(--Check-Background);
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  margin: auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.check-bg::after{
+  content: "";
+  width: 12px;
+  height: 12px;
+  background-image: url(images/icon-check.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: absolute;
+  margin: auto;
+}
+
+/* items footer */
+.items-footer{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 3rem;
+  padding: 0 1rem;
+  color: var(--Dark-Grayish-Blue2);
+  font-size: 0.8rem;
+}
+.item-filters{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 0 auto;
+}
+.item-filters,
+.clear-completed{
+  font-weight: 500;
+}
+.clear-completed:hover,
+.item-filters span:hover{
+  cursor: pointer;
+  color: var(--Light-Grayish-Blue);
+} 
+.active-filter{
+  color: var(--Bright-Blue);
+  font-weight: 600;
+}
+.item-filters span:active{
+  color: var(--Bright-Blue);
+}
+.drag-and-drop{
+  text-align: center;
+  margin-top: 2.8rem;
+  color: var(--Dark-Grayish-Blue2);
+  font-size: 0.8rem;
+}
+
+
+/* mobile view */
+@media (max-width: 600px){
+  body{
+    background-image: url(images/bg-mobile-dark.jpg);
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: contain;
+  }
+  .light-mode{
+    background-image: url(images/bg-mobile-light.jpg);
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: contain;
+  }
+  .container{
+    width: 90%;
+  }
+.todo-app{
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  padding: 60px 0;
+}
+/* task header */
+.heading{
+  color: var(--Very-Light-Gray);
+  text-transform: uppercase;
+}
+.add-task-bar,
+.add-light-mode{
+  margin-bottom: 1.9rem;
+}
+.all-tasks .task-row,
+.tasks-light-mode .task-row{
+  height: 3.5rem;
+}
+
+.item-filters span:hover{
+  cursor: pointer;
+  color: var(--Bright-Blue);
+}
+
+.task-toggle:not(.check-bg)::after{
+  content: "";
+  background: var(--Check-Background);
+  background-color: var(--Very-Dark-Desaturated-Blue);
+  border-radius: 50%;
+  width: 8px;
+  height: 8px;
+  position: absolute;
+  margin: auto;
+  z-index: -1;
+  display: none;
+}
+.task-toggle:not(.check-bg):hover{
+  z-index: 1;
+  background-color: var(--Very-Dark-Desaturated-Blue);
+  width: 20px;
+  height: 20px;
+} 
+}
+/* media query for tablets */
+/* @media(max-width: 48em){
+  .container{
+  width: 100%;
+  }
+.todo-app{
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  padding: 60px 0;
+}
+} */
